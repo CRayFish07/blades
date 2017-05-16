@@ -42,7 +42,8 @@ public class AuthorizationController extends BaseController {
 
 	@Permission("角色授权")
 	@RequestMapping("/roleAuth")
-	public void roleAuth(@ModelAttribute RoleAuthParamVo paramVo, HttpServletRequest request) {
+	@ResponseBody
+	public void roleAuth(@ModelAttribute RoleAuthParamVo paramVo) {
 		if (super.validate(paramVo)) {
 			this.authorizationService.roleAuth(paramVo.getRoleId(), paramVo.getResourceIds());
 		}

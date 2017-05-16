@@ -20,23 +20,12 @@
 		<param-name>support</param-name>
 		<param-value>www.iusofts.com</param-value>
 	</context-param>
-	<context-param>
-		<param-name>loggingRoot</param-name>
-		<param-value>D:/logs/idp</param-value>
-	</context-param>
-	<context-param>
-		<param-name>loggingLevel</param-name>
-		<param-value>DEBUG</param-value>
-	</context-param>
-	<context-param>
-		<param-name>loggingCharset</param-name>
-		<param-value>UTF-8</param-value>
-	</context-param>
+
 
 	<!-- Context ConfigLocation -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:/spring-context*.xml</param-value>
+		<param-value>classpath*:/config/spring/spring-context*.xml</param-value>
 	</context-param>
 
 
@@ -81,7 +70,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:/spring-mvc*.xml</param-value>
+			<param-value>classpath*:/config/spring/spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

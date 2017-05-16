@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份) -->
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/opt/iuosfts/logs/tomcat/app/${tomcat_app_base}/blades-log.log
+		</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				/opt/iuosfts/logs/tomcat/app/${tomcat_app_base}/blades-log.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+		</rollingPolicy>
+		<layout>
+			<Pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{32} -%msg%n</Pattern>
+		</layout>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

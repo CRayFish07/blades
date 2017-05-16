@@ -170,6 +170,9 @@
             margin-top: 14px;
             margin-left: 37px;
         }
+        .ztree span {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -178,7 +181,7 @@
     <li><span><img src="${ctx}/resource/sys/images/d03.png" width="24px"/></span>取消</li>
 </ul>
 <div id="zTreeContainer" style="height: auto;float: left;width: 90%;">
-    <ul id="ztreeData" class="ztree" style="float: left;"></ul>
+    <ul id="ztreeData" class="ztree" style="float: left;padding-left: 20px;"></ul>
 </div>
 <input type="hidden" id="id" name="id"/>
 </body>

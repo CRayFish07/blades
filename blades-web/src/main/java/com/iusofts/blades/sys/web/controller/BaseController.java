@@ -194,7 +194,7 @@ public class BaseController {
 	 * @date：2016年2月2日 下午2:07:20
 	 */
 	protected boolean isValidateProperty(HttpServletRequest request) {
-		if (StringUtils.isNotBlank(getValidateProperty(request))) {
+		if (request!=null && StringUtils.isNotBlank(getValidateProperty(request))) {
 			return true;
 		} else {
 			return false;
@@ -265,38 +265,43 @@ public class BaseController {
 	protected boolean validate(Object obj, HttpServletRequest request, Map<String, String> otherErrors,
 			Class<?>... groups) throws ValidationException {
 		ValidationResult result = null;
-		if (isValidateProperty(request)) {
-			if (hasProperty(obj, getValidateProperty(request))) {
-				// 校验单个属性
-				result = ValidationUtils.validateProperty(obj,
-						getValidateProperty(request));
+		if(request!=null) {
+			if (isValidateProperty(request)) {
+				if (hasProperty(obj, getValidateProperty(request))) {
+					// 校验单个属性
+					result = ValidationUtils.validateProperty(obj,
+							getValidateProperty(request));
+				} else {
+					result = new ValidationResult();
+				}
+
 			} else {
-				result = new ValidationResult();
+				// 校验整个对象
+				result = ValidationUtils.validateEntity(obj, groups);
 			}
 
-		} else {
-			// 校验整个对象
-			result = ValidationUtils.validateEntity(obj, groups);
-		}
-
-		// 校验再次输入是否一致
-		Map<String, String> confirmErrors = new HashMap<>();
-		Map<String, String> pMap = getParameter(request);
-		for (String key : pMap.keySet()) {
-			if (key.indexOf(":") != -1) {
-				String str[] = key.split(":");
-				String c1 = pMap.get(str[1]) == null ? "" : pMap.get(str[1]);
-				String c2 = pMap.get(key) == null ? "" : pMap.get(key);
-				if (!c1.equals(c2)) {
-					confirmErrors.put(key, "输入不一致");
+			// 校验再次输入是否一致
+			Map<String, String> confirmErrors = new HashMap<>();
+			Map<String, String> pMap = getParameter(request);
+			for (String key : pMap.keySet()) {
+				if (key.indexOf(":") != -1) {
+					String str[] = key.split(":");
+					String c1 = pMap.get(str[1]) == null ? "" : pMap.get(str[1]);
+					String c2 = pMap.get(key) == null ? "" : pMap.get(key);
+					if (!c1.equals(c2)) {
+						confirmErrors.put(key, "输入不一致");
+					}
 				}
 			}
-		}
 
-		// 添加校验再次输入不一致错误
-		if (confirmErrors != null && confirmErrors.size() > 0) {
-			// 汇总到其它错误信息中
-			otherErrors.putAll(confirmErrors);
+			// 添加校验再次输入不一致错误
+			if (confirmErrors != null && confirmErrors.size() > 0) {
+				// 汇总到其它错误信息中
+				otherErrors.putAll(confirmErrors);
+			}
+		}else{
+			// 校验整个对象
+			result = ValidationUtils.validateEntity(obj, groups);
 		}
 
 		// 将其它错误信息汇总到校验结果中

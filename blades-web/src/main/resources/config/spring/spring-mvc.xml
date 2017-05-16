@@ -8,7 +8,7 @@
     <description>Spring MVC Configuration</description>
     
     <!-- 加载配置属性文件 -->
-	<context:property-placeholder ignore-unresolvable="true" location="classpath:blades.properties" />
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:config/properties/dev.properties" />
 	
 	<!-- 自动扫描 controller类-->
 	<context:component-scan base-package="com.iusofts.blades.**.controller" />

@@ -5,7 +5,7 @@
 <title>字典信息</title>
 <link rel="stylesheet" href="${ctx}/resource/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <script type="text/javascript" src="${ctx}/resource/sys/js/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/resource/plugins/zTree_v3/js/jquery.ztree.all-3.5.js"></script>
+<script type="text/javascript" src="${ctx}/resource/plugins/zTree_v3/js/jquery.ztree.all.js"></script>
 <script type="text/javascript" src="${ctx}/resource/plugins/layer-v2.1/layer/layer.js"></script>
 
 <script type=text/javascript>

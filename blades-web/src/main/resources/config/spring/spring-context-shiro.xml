@@ -7,9 +7,6 @@
 
 	<description>Shiro Configuration</description>
 
-    <!-- 加载配置属性文件 -->
-	<context:property-placeholder ignore-unresolvable="true" location="classpath:blades.properties" />
-	
 	<!-- Shiro权限过滤过滤器定义 -->
 	<bean id="chainDefinitionSectionMetaSource" class="com.iusofts.blades.sys.security.ChainDefinitionSectionMetaSource">
 	    <property name="filterChainDefinitions">
@@ -17,8 +14,8 @@
 	            /login = authc
 	            /logout = logout
 	            /resource/** = anon
-	            /idp/user/list = perms[user:list]
-	            /idp/user/list.* = perms[user:list]
+	            /sys/user/list = perms[user:list]
+	            /sys/user/list.* = perms[user:list]
 	        </value>
 	    </property>
 	</bean>
