@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iusofts.blades.sys.dao.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.iusofts.blades.sys.model.Dictionary" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="fcode" property="fcode" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="INTEGER" />
+    <result column="standard" property="standard" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="classify" property="classify" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="VARCHAR" />
+    <result column="cache_able" property="cacheAble" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="levels" property="levels" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, code, fcode, alias, order_no, standard, category, classify, enabled, cache_able, 
+    description, pid, levels, icon, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iusofts.blades.sys.model.DictionaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit ${limitStart} , ${limitSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dictionary
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_dictionary
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iusofts.blades.sys.model.DictionaryExample" >
+    delete from t_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iusofts.blades.sys.model.Dictionary" >
+    insert into t_dictionary (id, name, code, 
+      fcode, alias, order_no, 
+      standard, category, classify, 
+      enabled, cache_able, description, 
+      pid, levels, icon, 
+      update_time)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{fcode,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{orderNo,jdbcType=INTEGER}, 
+      #{standard,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{classify,jdbcType=VARCHAR}, 
+      #{enabled,jdbcType=VARCHAR}, #{cacheAble,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=VARCHAR}, #{levels,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iusofts.blades.sys.model.Dictionary" >
+    insert into t_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="fcode != null" >
+        fcode,
+      </if>
+      <if test="alias != null" >
+        alias,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="standard != null" >
+        standard,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="classify != null" >
+        classify,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="cacheAble != null" >
+        cache_able,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="levels != null" >
+        levels,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="fcode != null" >
+        #{fcode,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="standard != null" >
+        #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null" >
+        #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=VARCHAR},
+      </if>
+      <if test="cacheAble != null" >
+        #{cacheAble,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null" >
+        #{levels,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iusofts.blades.sys.model.DictionaryExample" resultType="java.lang.Integer" >
+    select count(*) from t_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_dictionary
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcode != null" >
+        fcode = #{record.fcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alias != null" >
+        alias = #{record.alias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.standard != null" >
+        standard = #{record.standard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null" >
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classify != null" >
+        classify = #{record.classify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enabled != null" >
+        enabled = #{record.enabled,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cacheAble != null" >
+        cache_able = #{record.cacheAble,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levels != null" >
+        levels = #{record.levels,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_dictionary
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      fcode = #{record.fcode,jdbcType=VARCHAR},
+      alias = #{record.alias,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=INTEGER},
+      standard = #{record.standard,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      classify = #{record.classify,jdbcType=VARCHAR},
+      enabled = #{record.enabled,jdbcType=VARCHAR},
+      cache_able = #{record.cacheAble,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=VARCHAR},
+      levels = #{record.levels,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iusofts.blades.sys.model.Dictionary" >
+    update t_dictionary
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="fcode != null" >
+        fcode = #{fcode,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="standard != null" >
+        standard = #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null" >
+        classify = #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=VARCHAR},
+      </if>
+      <if test="cacheAble != null" >
+        cache_able = #{cacheAble,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null" >
+        levels = #{levels,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iusofts.blades.sys.model.Dictionary" >
+    update t_dictionary
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      fcode = #{fcode,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=INTEGER},
+      standard = #{standard,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      classify = #{classify,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=VARCHAR},
+      cache_able = #{cacheAble,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      levels = #{levels,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 根据父级ID删除所有子项（含多层） -->
+  <delete id="deleteByPid" parameterType="java.lang.String" >
+    delete from t_dictionary
+    where FIND_IN_SET(id, getDicChildList(#{pid,jdbcType=VARCHAR})) and t.id != #{pid,jdbcType=VARCHAR}
+  </delete>
+  <!-- 根据父级ID获取所有子项（含多层） -->
+  <select id="selectByPid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from t_dictionary t
+    where FIND_IN_SET(id, getDicChildList(#{pid,jdbcType=VARCHAR})) and t.id != #{pid,jdbcType=VARCHAR}
+  </select>
+  <!-- 根据父级ID和字典代码统计总数（检查代码是否存在） -->
+  <select id="countByCode" resultType="java.lang.Integer">
+    select count(*) from t_dictionary t where FIND_IN_SET(id, getDicChildList(#{pid,jdbcType=VARCHAR}))
+    and code=#{code} and t.id != #{pid,jdbcType=VARCHAR}
+  </select>
+  <!-- 获取根结点ID -->
+  <select id="selectRootId" resultType="java.lang.String">
+    select id from t_dictionary t where FIND_IN_SET(id, getDicChildList(#{pid,jdbcType=VARCHAR})) and pid ='0'
+  </select>
+
+  <!-- 查询父节点下的子节点个数 -->
+  <select id="countByPid" resultType="java.lang.Integer">
+    select count(*) from t_dictionary t
+    where FIND_IN_SET(id, getDicChildList(#{pid,jdbcType=VARCHAR})) and t.id != #{pid,jdbcType=VARCHAR}
+  </select>
+</mapper>

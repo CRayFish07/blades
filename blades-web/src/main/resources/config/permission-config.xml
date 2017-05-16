@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+  Blades v0.1
+-->
+<configuration>
+	<bean id="bladesDefaultConfig">
+		<property>
+			<name>projectName</name>
+			<value>基础开发平台</value>
+		</property>
+		<!-- 项目包名 -->
+		<property name="projectPackageName" value="com.iusofts.blades"></property>
+		<!-- 控制器存放包名 -->
+		<property name="controllerPackageName" value="controller"></property>
+		<!-- 不检查的资源 -->
+		<property>
+			<name>notCheckUri</name>
+			<value>
+			/index
+            /login
+            /logout
+			</value>
+		</property>
+		<!-- 是否展示不检查的资源 -->
+		<property name="showNotCheckUri" value="false"></property>
+	</bean>
+	<!-- 配置子系统包名和名称 -->
+	<bean id="bladesDefaultPackageName">
+		<property name="com.iusofts.blades.sys" value="后台管理系统"></property>
+	</bean>
+	
+</configuration>

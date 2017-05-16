@@ -1,0 +1,2 @@
+logback=com.iusofts.blades.sys.common.logcfg.logback.LogbackConfigurator
+log4j=com.iusofts.blades.sys.common.logcfg.log4j.Log4jConfigurator
